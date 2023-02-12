@@ -1,7 +1,6 @@
 import { initializeApp } from 'firebase/app';
-import { get, getDatabase, ref, set } from 'firebase/database';
-import { getDownloadURL, getStorage, uploadBytes } from 'firebase/storage';
-import { ref as storageRef } from 'firebase/storage';
+import { get, getDatabase, ref as dbRef, set } from 'firebase/database';
+import { getDownloadURL, getStorage, uploadBytes, ref as storageRef } from 'firebase/storage';
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
@@ -15,21 +14,20 @@ const app = initializeApp(firebaseConfig);
 const database = getDatabase(app);
 const storage = getStorage(app);
 
-// 게시글 업로드
-export const addPost = post => {
-  return set(ref(database, `posts/${post.id}`), post);
-};
-
-export const getPosts = async () => {
-  const snapshot = await get(ref(database, 'posts'));
-  const items = snapshot.val() || {};
-  return Object.values(items);
+// 모든 게시글 최신 날짜순으로 정렬하여 가져오기
+export const getAllPosts = async () => {
+  return get(dbRef(database, 'posts')).then(snapshot => {
+    const items = snapshot.val() || {};
+    return Object.values(items).sort((a, b) => b.date - a.date);
+  });
 };
 
 // 이미지 스토리지에 업로드
-export const addImage = async file => {
-  return uploadBytes(storageRef(storage, file.name), file).then(snapshot => {
-    console.log(snapshot);
-    getDownloadURL(snapshot.ref).then(url => console.log(url));
-  });
+export const getCoverImageUrl = async file => {
+  return uploadBytes(storageRef(storage, file.name), file).then(snapshot => getDownloadURL(snapshot.ref));
+};
+
+// 게시글 업로드
+export const addNewPost = async posts => {
+  return set(dbRef(database, `posts/${posts.id}`), posts);
 };
