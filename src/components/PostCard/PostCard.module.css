@@ -4,6 +4,7 @@
   align-items: center;
   gap: 1rem;
   margin-bottom: 2rem;
+  cursor: pointer;
 }
 .category {
   background: var(--category-bg);
@@ -23,6 +24,10 @@
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
   overflow: hidden;
+  transition: color 300ms;
+}
+.card:hover .title {
+  color: #cc3551;
 }
 .title {
   line-height: 1.4;
@@ -39,4 +44,8 @@
   width: 100px;
   height: 100px;
   object-fit: contain;
+  transition: 300ms;
+}
+.card:hover .image {
+  transform: scale(1.15);
 }

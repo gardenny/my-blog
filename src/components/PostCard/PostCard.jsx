@@ -4,7 +4,7 @@ import getStringDate from '../../util/data';
 
 export default function PostCard({ posts }) {
   return (
-    <ul>
+    <>
       {posts.map(({ id, image, category, date, title, description }) => (
         <li className={styles.card} key={id}>
           <div className={styles.container}>
@@ -18,6 +18,6 @@ export default function PostCard({ posts }) {
           </div>
         </li>
       ))}
-    </ul>
+    </>
   );
 }
