@@ -1,13 +1,19 @@
-import React, { useEffect, useState } from 'react';
-import PostCard from '../PostCard/PostCard';
+import { useQuery } from '@tanstack/react-query';
 import { getAllPosts } from '../../api/firebase';
 
+import NotFound from '../../pages/NotFound';
+import PostCard from '../PostCard/PostCard';
+
 export default function PostList() {
-  const [posts, setPosts] = useState([]);
+  const {
+    isLoading,
+    error,
+    data: posts,
+  } = useQuery(['posts'], getAllPosts, {
+    staleTime: 1000 * 6 * 5,
+  });
 
-  useEffect(() => {
-    getAllPosts().then(response => setPosts(response));
-  }, []);
-
-  return <PostCard posts={posts} />;
+  if (isLoading) return <p>isLoading...</p>;
+  if (error) return <NotFound />;
+  return posts && <PostCard posts={posts} />;
 }
