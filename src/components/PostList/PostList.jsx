@@ -3,7 +3,7 @@ import styles from './PostList.module.css';
 
 import { getAllPosts } from '../../api/firebase';
 import NotFound from '../../pages/NotFound';
-import PostCard from '../PostCard/PostCard';
+import PostItem from '../PostItem/PostItem';
 
 export default function PostList() {
   const {
@@ -22,7 +22,7 @@ export default function PostList() {
       {!hasPosts && <div className={styles.comment}>작성된 게시글이 없습니다.</div>}
       {hasPosts && (
         <ul className={styles.list}>
-          <PostCard posts={posts} />
+          <PostItem posts={posts} />
         </ul>
       )}
     </>

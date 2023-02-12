@@ -1,8 +1,8 @@
 import React from 'react';
-import styles from './PostCard.module.css';
+import styles from './PostItem.module.css';
 import getStringDate from '../../util/data';
 
-export default function PostCard({ posts }) {
+export default function PostItem({ posts }) {
   return (
     <>
       {posts.map(({ id, image, category, date, title, description }) => (
