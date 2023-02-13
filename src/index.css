@@ -102,8 +102,21 @@ h3 {
   color: var(--text-color) !important;
   font-size: 1.125rem;
 }
-.toastui-editor-contents pre {
-  background-color: rgba(166, 168, 170, 0.1) !important;
+.toastui-editor-contents pre,
+.toastui-editor-code-block-language span,
+.toastui-editor-code-block-language input,
+.toastui-editor-code-block-language-list,
+.toastui-editor-code-block-language-list button,
+.toastui-editor-ww-code-block-highlighting::after {
+  background-color: #4a3f3f !important;
+  box-shadow: none !important;
+  border: none !important;
+}
+.toastui-editor-code-block-language-list button:hover {
+  background-color: var(--input-bg) !important;
+}
+.toastui-editor-code-block-language-list button.active {
+  color: var(--category-bg) !important;
 }
 .toastui-editor-contents blockquote {
   border-color: #807473 !important;
