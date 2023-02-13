@@ -23,7 +23,8 @@ import '@toast-ui/editor-plugin-code-syntax-highlight/dist/toastui-editor-plugin
 import 'prismjs/themes/prism-dark.css';
 
 import Button from '../Button/Button';
-import { getCoverImageUrl, addNewPost } from '../../api/firebase';
+import { getCoverImageUrl } from '../../api/firebase';
+import usePost from '../../hooks/usePost';
 
 const optionList = ['html', 'css', 'javascript', 'react', 'git', 'project', 'web', 'tip', 'error', 'setting', 'etc'];
 const toolbarItems = [
@@ -36,6 +37,8 @@ const toolbarItems = [
 export default function PostEditor() {
   const [content, setContent] = useState({ category: optionList[0], title: '', description: '', body: '' });
   const { image, category, title, description, body } = content;
+
+  const { onAdd } = usePost();
   const navigate = useNavigate();
 
   const titleRef = useRef();
@@ -70,8 +73,8 @@ export default function PostEditor() {
       return;
     }
 
-    if (window.confirm('게시글을 작성하시겠습니까?')) {
-      addNewPost({
+    if (window.confirm('새 게시글을 작성하시겠습니까?')) {
+      onAdd.mutate({
         id: uuid(),
         image: image || null,
         category,

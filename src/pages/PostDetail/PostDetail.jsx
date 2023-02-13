@@ -12,11 +12,11 @@ import Prism from 'prismjs';
 import '@toast-ui/editor-plugin-code-syntax-highlight/dist/toastui-editor-plugin-code-syntax-highlight.css';
 import 'prismjs/themes/prism-dark.css';
 
+import usePost from '../../hooks/usePost';
 import PostInfo from '../../components/PostInfo/PostInfo';
 import Button from '../../components/Button/Button';
 import Profile from '../../components/Profile/Profile';
 import getStringDate from '../../util/data';
-import { removePost } from '../../api/firebase';
 
 export default function PostDetail() {
   const {
@@ -24,14 +24,14 @@ export default function PostDetail() {
       posts: { id, category, date, title, body },
     },
   } = useLocation();
+  const { onRemove } = usePost();
 
   const navigate = useNavigate();
   const handleRemove = () => {
     if (window.confirm('게시글을 삭제하시겠습니까?')) {
-      removePost(id).then(() => {
-        alert('게시글이 삭제되었습니다.');
-        navigate('/', { replace: true });
-      });
+      onRemove.mutate(id);
+      alert('게시글이 삭제되었습니다.');
+      navigate('/', { replace: true });
     }
   };
 
