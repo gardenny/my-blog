@@ -2,6 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import styles from './PostList.module.css';
 
 import { getAllPosts } from '../../api/firebase';
+import LoadingSpinner from '../LoadingSpinner/LoadingSpinner';
 import NotFound from '../../pages/NotFound';
 import PostItem from '../PostItem/PostItem';
 
@@ -15,7 +16,7 @@ export default function PostList() {
   });
   const hasPosts = posts && posts.length > 0;
 
-  if (isLoading) return <p>isLoading...</p>;
+  if (isLoading) return <LoadingSpinner />;
   if (error) return <NotFound />;
   return (
     <>
