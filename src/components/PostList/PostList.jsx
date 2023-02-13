@@ -21,11 +21,7 @@ export default function PostList() {
   return (
     <>
       {!hasPosts && <div className={styles.comment}>작성된 게시글이 없습니다.</div>}
-      {hasPosts && (
-        <ul className={styles.list}>
-          <PostItem posts={posts} />
-        </ul>
-      )}
+      {hasPosts && posts.map((post, index) => <PostItem key={index} posts={post} />)}
     </>
   );
 }

@@ -1,0 +1,16 @@
+.head {
+  margin-bottom: 2rem;
+}
+.meta {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+}
+.btn_wrap {
+  display: flex;
+  column-gap: 0.5rem;
+}
+.title {
+  font-size: 1.75rem;
+  line-height: 1.4;
+}

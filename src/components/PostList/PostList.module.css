@@ -1,9 +1,6 @@
-.list {
-  padding: 2rem 0;
-}
 .comment {
   width: 100%;
-  height: calc(100vh - 400px);
+  height: calc(100vh - 200px);
   display: flex;
   justify-content: center;
   align-items: center;

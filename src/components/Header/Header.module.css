@@ -1,27 +1,14 @@
 .header {
-  background: var(--navbar-bg);
+  background: var(--header-bg);
   display: flex;
 }
 .navbar {
-  height: 350px;
+  height: 200px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   margin: auto;
-}
-.profile {
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
-}
-.author {
-  background: var(--category-bg);
-  padding: 0.2rem 0.5rem;
-  border-radius: 1rem;
-  font-size: 0.75rem;
-  font-weight: bold;
-  margin: 0.6rem 0 0.8rem;
 }
 .title {
   font-size: 2.25rem;

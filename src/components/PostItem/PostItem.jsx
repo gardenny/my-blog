@@ -1,23 +1,22 @@
 import React from 'react';
 import styles from './PostItem.module.css';
+import { useNavigate } from 'react-router-dom';
+
+import PostInfo from '../../components/PostInfo/PostInfo';
 import getStringDate from '../../util/data';
 
-export default function PostItem({ posts }) {
+export default function PostItem({ posts, posts: { id, image, category, date, title, description } }) {
+  const navigate = useNavigate();
   return (
     <>
-      {posts.map(({ id, image, category, date, title, description }) => (
-        <li className={styles.card} key={id}>
-          <div className={styles.container}>
-            <span className={styles.category}>{category}</span>
-            <span className={styles.date}>{getStringDate(new Date(date))}</span>
-            <h2 className={styles.title}>{title}</h2>
-            {description && <p className={styles.description}>{description}</p>}
-          </div>
-          <div className={styles.image_wrap}>
-            {image && <img className={styles.image} src={image} alt={category} />}
-          </div>
-        </li>
-      ))}
+      <div className={styles.item} onClick={() => navigate(`/posts/${id}`, { state: { posts } })}>
+        <div>
+          <PostInfo category={category} date={getStringDate(new Date(date))} />
+          <h2 className={styles.title}>{title}</h2>
+          {description && <p className={styles.description}>{description}</p>}
+        </div>
+        <div className={styles.image_wrap}>{image && <img className={styles.image} src={image} alt={category} />}</div>
+      </div>
     </>
   );
 }

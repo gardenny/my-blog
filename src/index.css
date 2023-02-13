@@ -1,6 +1,7 @@
+/* Global */
 :root {
   --main-bg: #262120;
-  --navbar-bg: #332c2b;
+  --header-bg: #332c2b;
   --category-bg: #804752;
   --input-bg: #403333;
   --text-color: #d9d2d2;
@@ -18,6 +19,7 @@ body {
 main {
   max-width: 600px;
   margin: 0 auto;
+  padding: 2rem 1rem;
 }
 li {
   list-style: none;
@@ -56,10 +58,44 @@ h3 {
 }
 .toastui-editor-defaultUI .ProseMirror,
 .toastui-editor-defaultUI-toolbar {
-  background: var(--input-bg) !important;
+  background-color: var(--input-bg) !important;
   font-family: 'Pretendard Variable';
   font-size: 1rem;
 }
 .toastui-editor-toolbar-icons {
   border-color: transparent !important;
+}
+.toastui-editor-toolbar-icons.codeblock {
+  background-position-x: -389px !important;
+}
+.toastui-editor-toolbar-icons:not(:disabled):hover {
+  background-color: #4d4343 !important;
+}
+.toastui-editor-tooltip,
+.toastui-editor-tooltip .arrow {
+  background-color: var(--header-bg) !important;
+}
+.toastui-editor-contents {
+  font-family: 'Pretendard Variable' !important;
+}
+.toastui-editor-contents h1,
+.toastui-editor-contents h2,
+.toastui-editor-contents h3,
+.toastui-editor-contents h4,
+.toastui-editor-contents h5,
+.toastui-editor-contents h6 {
+  line-height: 1.4 !important;
+}
+.toastui-editor-contents p {
+  color: var(--text-color) !important;
+  font-size: 1.125rem;
+}
+.toastui-editor-contents pre {
+  background-color: rgba(166, 168, 170, 0.1) !important;
+}
+.toastui-editor-contents blockquote {
+  border-color: #807473 !important;
+}
+.toastui-editor-contents blockquote p {
+  color: #807473 !important;
 }

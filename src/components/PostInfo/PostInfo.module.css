@@ -1,0 +1,16 @@
+.info {
+  display: flex;
+  align-items: center;
+  column-gap: 0.5rem;
+}
+.category {
+  background: var(--category-bg);
+  padding: 0.2rem 0.5rem;
+  border-radius: 0.5rem;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 0.75rem;
+}
+.date {
+  font-size: 0.875rem;
+}

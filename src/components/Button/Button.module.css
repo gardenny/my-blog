@@ -8,4 +8,8 @@
   font-size: 1.125rem;
   padding: 1rem 2rem;
   border-radius: 0.3rem;
+  transition: filter 300ms;
+}
+.button:hover {
+  filter: brightness(50%);
 }

@@ -9,8 +9,6 @@ export default function Header() {
   return (
     <header className={styles.header}>
       <nav className={styles.navbar}>
-        <img className={styles.profile} src="/profile.jpeg" alt="profile" />
-        <span className={styles.author}>@IMJOne</span>
         <Link to={'/'}>
           <h1 className={styles.title}>제이원 개발 블로그</h1>
         </Link>

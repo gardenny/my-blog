@@ -9,11 +9,18 @@ import uuid from 'react-uuid';
 import { Editor } from '@toast-ui/react-editor';
 import '@toast-ui/editor/dist/toastui-editor.css';
 import '@toast-ui/editor/dist/theme/toastui-editor-dark.css';
+import '@toast-ui/editor/dist/i18n/ko-kr';
 
-// Toast ColorSyntax 플러그인
+// color-syntax 플러그인
 import colorSyntax from '@toast-ui/editor-plugin-color-syntax';
 import '@toast-ui/editor-plugin-color-syntax/dist/toastui-editor-plugin-color-syntax.css';
 import 'tui-color-picker/dist/tui-color-picker.css';
+
+// code-syntax-highlight 플러그인
+import codeSyntaxHighlight from '@toast-ui/editor-plugin-code-syntax-highlight';
+import Prism from 'prismjs'; // prism 테마 추가
+import '@toast-ui/editor-plugin-code-syntax-highlight/dist/toastui-editor-plugin-code-syntax-highlight.css';
+import 'prismjs/themes/prism-dark.css';
 
 import Button from '../Button/Button';
 import { getCoverImageUrl, addNewPost } from '../../api/firebase';
@@ -23,7 +30,7 @@ const toolbarItems = [
   // 툴바 옵션 설정
   ['heading', 'bold', 'italic', 'strike'],
   ['hr', 'quote'],
-  ['ul', 'ol'],
+  ['ul', 'ol', 'code', 'codeblock'],
 ];
 
 export default function PostEditor() {
@@ -105,13 +112,14 @@ export default function PostEditor() {
       <div>
         <h3>내용</h3>
         <Editor
-          plugins={[colorSyntax]}
-          height="500px"
+          plugins={[colorSyntax, [codeSyntaxHighlight, { highlighter: Prism }]]}
           initialEditType="wysiwyg"
           hideModeSwitch={true}
           toolbarItems={toolbarItems}
-          theme="dark"
           autofocus={false}
+          language="ko-KR"
+          theme="dark"
+          height="500px"
           ref={editorRef}
           onChange={handleEditor}
         ></Editor>

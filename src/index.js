@@ -6,7 +6,8 @@ import './index.css';
 import App from './App';
 import NotFound from './pages/NotFound';
 import Home from './pages/Home';
-import Post from './pages/Post';
+import PostDetail from './pages/PostDetail/PostDetail';
+import Edit from './pages/Edit/Edit';
 import New from './pages/New';
 
 const router = createBrowserRouter([
@@ -17,7 +18,8 @@ const router = createBrowserRouter([
     children: [
       { index: true, element: <Home /> },
       { path: '/new', element: <New /> },
-      { path: '/:id', element: <Post /> },
+      { path: '/posts/:id', element: <PostDetail /> },
+      { path: '/posts/:id/edit', element: <Edit /> },
     ],
   },
 ]);

@@ -1,5 +1,5 @@
 import { initializeApp } from 'firebase/app';
-import { get, getDatabase, ref as dbRef, set } from 'firebase/database';
+import { get, getDatabase, ref as dbRef, remove, set } from 'firebase/database';
 import { getDownloadURL, getStorage, uploadBytes, ref as storageRef } from 'firebase/storage';
 
 const firebaseConfig = {
@@ -30,4 +30,9 @@ export const getCoverImageUrl = async file => {
 // 게시글 업로드
 export const addNewPost = async posts => {
   return set(dbRef(database, `posts/${posts.id}`), posts);
+};
+
+// 게시글 삭제
+export const removePost = async postId => {
+  return remove(dbRef(database, `posts/${postId}`));
 };
