@@ -1,5 +1,13 @@
 import React from 'react';
+import { useLocation } from 'react-router-dom';
+import PostEditor from '../../components/PostEditor/PostEditor';
 
 export default function Edit() {
-  return <h1>Edit</h1>;
+  const {
+    state: {
+      posts: { id, category, date, title, body },
+    },
+  } = useLocation();
+
+  return <PostEditor />;
 }

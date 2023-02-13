@@ -21,7 +21,8 @@ import getStringDate from '../../util/data';
 export default function PostDetail() {
   const {
     state: {
-      posts: { id, category, date, title, body },
+      posts,
+      posts: { id, category, date, image, title, body },
     },
   } = useLocation();
   const { onRemove } = usePost();
@@ -45,12 +46,17 @@ export default function PostDetail() {
               text={'수정하기'}
               padding="0.2rem"
               fontSize="0.75rem"
-              onClick={() => navigate(`/posts/:${id}/edit`)}
+              onClick={() => navigate(`/posts/:${id}/edit`, { state: { posts } })}
             />
             <Button text={'삭제하기'} padding="0.2rem" fontSize="0.75rem" onClick={handleRemove} />
           </div>
         </div>
         <h1 className={styles.title}>{title}</h1>
+        {image && (
+          <div className={styles.image_wrap}>
+            <img className={styles.image} src={image} alt={category} />
+          </div>
+        )}
       </div>
       <Viewer plugins={[[codeSyntaxHighlight, { highlighter: Prism }]]} initialValue={body || ''} theme="dark" />
       <Profile />
