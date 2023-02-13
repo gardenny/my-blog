@@ -35,7 +35,7 @@
   opacity: 0.4;
   transition: opacity 300ms;
 }
-.icon:hover {
+.link:hover {
   opacity: 1;
 }
 .new {

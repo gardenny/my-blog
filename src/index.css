@@ -50,6 +50,18 @@ h3 {
   margin-bottom: 0.5em;
 }
 
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 0.5rem;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--category-bg);
+  border-radius: 2rem;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
 /* Toast editor custom */
 .toastui-editor-defaultUI {
   border: none !important;
