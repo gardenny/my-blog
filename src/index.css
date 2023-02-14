@@ -4,17 +4,18 @@
   --header-bg: #332c2b;
   --category-bg: #804752;
   --input-bg: #403333;
+  --search-bg: #211a1a;
   --text-color: #d9d2d2;
 }
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: 'Pretendard Variable';
 }
 body {
   background: var(--main-bg);
   color: var(--text-color);
-  font-family: 'Pretendard Variable';
 }
 main {
   max-width: 600px;
@@ -39,10 +40,11 @@ select {
   resize: none;
   display: block;
   width: 100%;
+  height: 40px;
   background: var(--input-bg);
   color: var(--text-color);
   border-radius: 0.2rem;
-  padding: 0.5rem 1rem;
+  padding: 0 1rem;
   font-size: 1rem;
 }
 h3 {

@@ -1,0 +1,12 @@
+.input_search {
+  height: 48px;
+  background: var(--search-bg);
+  font-weight: bold;
+  margin-bottom: 2rem;
+}
+.input_search:hover {
+  background: var(--input-bg);
+}
+.input_search:focus {
+  background: #4d4343;
+}
