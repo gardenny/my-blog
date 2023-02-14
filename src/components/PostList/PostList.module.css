@@ -1,6 +1,6 @@
-.comment {
+.container {
   width: 100%;
-  height: calc(100vh - 200px);
+  height: calc(100vh - 314px);
   display: flex;
   justify-content: center;
   align-items: center;

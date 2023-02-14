@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './PostDetail.module.css';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 // Toast 에디터
 import { Viewer } from '@toast-ui/react-editor';
@@ -13,21 +13,32 @@ import '@toast-ui/editor-plugin-code-syntax-highlight/dist/toastui-editor-plugin
 import 'prismjs/themes/prism-dark.css';
 
 import usePost from '../../hooks/usePost';
+import { usePostContext } from '../../context/PostProvider';
+import getStringDate from '../../util/data';
+
+import LoadingSpinner from '../../components/LoadingSpinner/LoadingSpinner';
+import NotFound from '../NotFound';
 import PostInfo from '../../components/PostInfo/PostInfo';
 import Button from '../../components/Button/Button';
 import Profile from '../../components/Profile/Profile';
-import getStringDate from '../../util/data';
 
 export default function PostDetail() {
-  const {
-    state: {
-      posts,
-      posts: { id, category, date, image, title, body },
-    },
-  } = useLocation();
+  const [content, setContent] = useState('');
+  const { postId } = useParams();
+  const { isLoading, error, posts } = usePostContext();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (posts) {
+      const targetPost = posts.find(post => post.id === postId);
+      setContent(targetPost);
+    }
+  }, [posts, postId]);
+
+  const { id, category, date, title, image, body } = content;
   const { onRemove } = usePost();
 
-  const navigate = useNavigate();
+  const goEdit = () => navigate(`/posts/${id}/edit`, { state: { content } });
   const handleRemove = () => {
     if (window.confirm('게시글을 삭제하시겠습니까?')) {
       onRemove.mutate(id);
@@ -36,18 +47,15 @@ export default function PostDetail() {
     }
   };
 
+  if (isLoading) return <LoadingSpinner />;
+  if (error) return <NotFound />;
   return (
     <>
       <div className={styles.head}>
         <div className={styles.meta}>
           <PostInfo category={category} date={getStringDate(new Date(date))} />
           <div className={styles.btn_wrap}>
-            <Button
-              text={'수정하기'}
-              padding="0.2rem"
-              fontSize="0.75rem"
-              onClick={() => navigate(`/posts/${id}/edit`, { state: { posts } })}
-            />
+            <Button text={'수정하기'} padding="0.2rem" fontSize="0.75rem" onClick={goEdit} />
             <Button text={'삭제하기'} padding="0.2rem" fontSize="0.75rem" onClick={handleRemove} />
           </div>
         </div>

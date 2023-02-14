@@ -22,9 +22,9 @@ import Prism from 'prismjs'; // prism 테마 추가
 import '@toast-ui/editor-plugin-code-syntax-highlight/dist/toastui-editor-plugin-code-syntax-highlight.css';
 import 'prismjs/themes/prism-dark.css';
 
-import Button from '../Button/Button';
 import { getCoverImageUrl } from '../../api/firebase';
 import usePost from '../../hooks/usePost';
+import Button from '../Button/Button';
 
 const optionList = ['html', 'css', 'javascript', 'react', 'git', 'project', 'web', 'tip', 'error', 'setting', 'etc'];
 const toolbarItems = [
@@ -36,8 +36,8 @@ const toolbarItems = [
 
 const initialContent = { category: optionList[0], title: '', description: '', body: '' };
 
-export default function PostEditor({ isEdit, posts }) {
-  const [content, setContent] = useState(isEdit ? posts : initialContent);
+export default function PostEditor({ isEdit, targetPost }) {
+  const [content, setContent] = useState(isEdit ? targetPost : initialContent);
   const { id, image, category, title, description, body } = content;
 
   const { onAdd } = usePost();
@@ -46,9 +46,11 @@ export default function PostEditor({ isEdit, posts }) {
   const titleRef = useRef();
   const editorRef = useRef();
 
+  useEffect(() => {}, []);
+
   // 수정 모드일 경우 Toast 에디터 초기 내용 설정
   useEffect(() => {
-    if (isEdit) editorRef.current.getInstance().setMarkdown(body);
+    if (isEdit) editorRef.current.getInstance().setHTML(body);
   }, [isEdit, body]);
 
   const uploadImage = e => {
@@ -62,7 +64,7 @@ export default function PostEditor({ isEdit, posts }) {
   };
 
   const handleEditor = () => {
-    const text = editorRef.current.getInstance().getMarkdown();
+    const text = editorRef.current.getInstance().getHTML();
     setContent({ ...content, body: text });
   };
 
@@ -82,7 +84,7 @@ export default function PostEditor({ isEdit, posts }) {
 
     if (window.confirm('게시글을 작성하시겠습니까?')) {
       onAdd.mutate({
-        id: isEdit ? id : uuid(),
+        id: isEdit ? id : uuid(), // 수정 모드일 경우 기존의 아이디 업로드
         image: image || null,
         category,
         title,
@@ -91,7 +93,7 @@ export default function PostEditor({ isEdit, posts }) {
         date: new Date().getTime(),
       });
       alert('게시글이 작성되었습니다.');
-      navigate('/', { replace: true });
+      navigate(isEdit ? `/posts/${id}` : '/', { replace: true });
     }
   };
 
@@ -113,24 +115,11 @@ export default function PostEditor({ isEdit, posts }) {
       </div>
       <div>
         <h3>제목</h3>
-        <input
-          className={styles.input_text}
-          type="text"
-          name="title"
-          value={title}
-          ref={titleRef}
-          onChange={handleContent}
-        />
+        <input className={styles.input_text} type="text" name="title" value={title} ref={titleRef} onChange={handleContent} />
       </div>
       <div>
         <h3>설명</h3>
-        <input
-          className={styles.input_text}
-          type="text"
-          name="description"
-          value={description}
-          onChange={handleContent}
-        />
+        <input className={styles.input_text} type="text" name="description" value={description} onChange={handleContent} />
       </div>
       <div>
         <h3>내용</h3>
