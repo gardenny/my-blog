@@ -46,7 +46,7 @@ export default function PostDetail() {
               text={'수정하기'}
               padding="0.2rem"
               fontSize="0.75rem"
-              onClick={() => navigate(`/posts/:${id}/edit`, { state: { posts } })}
+              onClick={() => navigate(`/posts/${id}/edit`, { state: { posts } })}
             />
             <Button text={'삭제하기'} padding="0.2rem" fontSize="0.75rem" onClick={handleRemove} />
           </div>

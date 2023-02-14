@@ -4,10 +4,8 @@ import PostEditor from '../../components/PostEditor/PostEditor';
 
 export default function Edit() {
   const {
-    state: {
-      posts: { id, category, date, title, body },
-    },
+    state: { posts },
   } = useLocation();
 
-  return <PostEditor />;
+  return <PostEditor isEdit={true} posts={posts} />;
 }

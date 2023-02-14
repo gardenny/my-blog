@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import styles from './PostEditor.module.css';
 
 import { useNavigate } from 'react-router-dom';
@@ -34,15 +34,22 @@ const toolbarItems = [
   ['ul', 'ol', 'code', 'codeblock'],
 ];
 
-export default function PostEditor() {
-  const [content, setContent] = useState({ category: optionList[0], title: '', description: '', body: '' });
-  const { image, category, title, description, body } = content;
+const initialContent = { category: optionList[0], title: '', description: '', body: '' };
+
+export default function PostEditor({ isEdit, posts }) {
+  const [content, setContent] = useState(isEdit ? posts : initialContent);
+  const { id, image, category, title, description, body } = content;
 
   const { onAdd } = usePost();
   const navigate = useNavigate();
 
   const titleRef = useRef();
   const editorRef = useRef();
+
+  // 수정 모드일 경우 Toast 에디터 초기 내용 설정
+  useEffect(() => {
+    if (isEdit) editorRef.current.getInstance().setMarkdown(body);
+  }, [isEdit, body]);
 
   const uploadImage = e => {
     const file = e.target.files[0];
@@ -62,7 +69,7 @@ export default function PostEditor() {
   const handleSubmit = e => {
     e.preventDefault();
 
-    if (title.trim().length <= 0) {
+    if (title.trim().length === 0) {
       alert('제목을 입력해주세요.');
       titleRef.current.focus();
       return;
@@ -73,9 +80,9 @@ export default function PostEditor() {
       return;
     }
 
-    if (window.confirm('새 게시글을 작성하시겠습니까?')) {
+    if (window.confirm('게시글을 작성하시겠습니까?')) {
       onAdd.mutate({
-        id: uuid(),
+        id: isEdit ? id : uuid(),
         image: image || null,
         category,
         title,
@@ -98,7 +105,7 @@ export default function PostEditor() {
       </div>
       <div>
         <h3>분류</h3>
-        <select className={styles.select} name="category" onChange={handleContent}>
+        <select className={styles.select} name="category" value={category} onChange={handleContent}>
           {optionList.map((option, index) => (
             <option key={index}>{option.toLocaleUpperCase()}</option>
           ))}
@@ -106,11 +113,24 @@ export default function PostEditor() {
       </div>
       <div>
         <h3>제목</h3>
-        <input className={styles.input_text} type="text" name="title" ref={titleRef} onChange={handleContent} />
+        <input
+          className={styles.input_text}
+          type="text"
+          name="title"
+          value={title}
+          ref={titleRef}
+          onChange={handleContent}
+        />
       </div>
       <div>
         <h3>설명</h3>
-        <input className={styles.input_text} type="text" name="description" onChange={handleContent} />
+        <input
+          className={styles.input_text}
+          type="text"
+          name="description"
+          value={description}
+          onChange={handleContent}
+        />
       </div>
       <div>
         <h3>내용</h3>
@@ -131,3 +151,7 @@ export default function PostEditor() {
     </form>
   );
 }
+
+PostEditor.defaultProps = {
+  isEdit: false,
+};
