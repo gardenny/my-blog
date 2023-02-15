@@ -25,3 +25,10 @@
   background: var(--category-bg);
   color: var(--text-color);
 }
+
+@media screen and (max-width: 768px) {
+  .toast {
+    right: 1rem;
+    bottom: 1rem;
+  }
+}

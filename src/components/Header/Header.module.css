@@ -12,7 +12,7 @@
   color: var(--main-bg);
   padding: 0 1rem;
   border-radius: 2rem;
-  font-size: 1.125rem;
+  font-size: 1rem;
   font-weight: bold;
   transition: background 300ms, color 300ms;
 }
@@ -64,4 +64,14 @@
 }
 .new:hover {
   color: var(--category-bg);
+}
+
+@media screen and (max-width: 768px) {
+  .login {
+    top: 0.5rem;
+    right: 0.5rem;
+    height: 30px;
+    padding: 0 0.5rem;
+    font-size: 0.75rem;
+  }
 }
