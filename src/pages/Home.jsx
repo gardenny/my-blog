@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-
 import { usePostContext } from '../context/PostProvider';
+
 import LoadingSpinner from '../components/LoadingSpinner/LoadingSpinner';
 import NotFound from './NotFound/NotFound';
 import PostList from '../components/PostList/PostList';

@@ -19,7 +19,7 @@
 
 :global .success {
   background: var(--text-color);
-  color: var(--category-bg);
+  color: #333333;
 }
 :global .error {
   background: var(--category-bg);
