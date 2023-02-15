@@ -33,15 +33,20 @@ export default function PostDetail() {
   const dispatch = useDispatch();
   const isLogin = useSelector(state => state.auth.isLogin);
 
+  const { id, category, date, title, image, body } = content;
+  const { onRemove } = usePost();
+
+  useEffect(() => {
+    const pageTitle = document.querySelector('title');
+    pageTitle.innerText = `${title} | 제이원 개발 블로그`;
+  }, [title]);
+
   useEffect(() => {
     if (posts) {
       const targetPost = posts.find(post => post.id === postId);
       setContent(targetPost);
     }
   }, [posts, postId]);
-
-  const { id, category, date, title, image, body } = content;
-  const { onRemove } = usePost();
 
   const goEdit = () => navigate(`/posts/${id}/edit`, { state: { content } });
   const handleRemove = () => {
