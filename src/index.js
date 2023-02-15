@@ -11,6 +11,7 @@ import Edit from './pages/Edit/Edit';
 import New from './pages/New';
 import { Provider } from 'react-redux';
 import { store } from './store/store';
+import ProtectedRoute from './pages/ProtectedRoute';
 
 const router = createBrowserRouter([
   {
@@ -18,10 +19,30 @@ const router = createBrowserRouter([
     element: <App />,
     errorElement: <NotFound />,
     children: [
-      { index: true, element: <Home /> },
-      { path: '/new', element: <New /> },
-      { path: '/posts/:postId', element: <PostDetail /> },
-      { path: '/posts/:postId/edit', element: <Edit /> },
+      {
+        index: true,
+        element: <Home />,
+      },
+      {
+        path: '/new',
+        element: (
+          <ProtectedRoute>
+            <New />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: '/posts/:postId',
+        element: <PostDetail />,
+      },
+      {
+        path: '/posts/:postId/edit',
+        element: (
+          <ProtectedRoute>
+            <Edit />
+          </ProtectedRoute>
+        ),
+      },
     ],
   },
 ]);
