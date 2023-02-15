@@ -1,7 +1,7 @@
 import styles from './PostDetail.module.css';
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 // Toast 에디터
 import { Viewer } from '@toast-ui/react-editor';
@@ -28,8 +28,10 @@ export default function PostDetail() {
   const [content, setContent] = useState('');
   const { postId } = useParams();
   const { isLoading, error, posts } = usePostContext();
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const isLogin = useSelector(state => state.auth.isLogin);
 
   useEffect(() => {
     if (posts) {
@@ -58,10 +60,12 @@ export default function PostDetail() {
       <div className={styles.head}>
         <div className={styles.meta}>
           <PostInfo category={category} date={getStringDate(new Date(date))} />
-          <div className={styles.btn_wrap}>
-            <Button text={'수정하기'} padding="0.2rem" fontSize="0.75rem" onClick={goEdit} />
-            <Button text={'삭제하기'} padding="0.2rem" fontSize="0.75rem" onClick={handleRemove} />
-          </div>
+          {isLogin && (
+            <div className={styles.btn_wrap}>
+              <Button text={'수정하기'} padding="0.2rem" fontSize="0.75rem" onClick={goEdit} />
+              <Button text={'삭제하기'} padding="0.2rem" fontSize="0.75rem" onClick={handleRemove} />
+            </div>
+          )}
         </div>
         <h1 className={styles.title}>{title}</h1>
         {image && (

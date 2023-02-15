@@ -4,10 +4,19 @@ import { Link } from 'react-router-dom';
 
 import { RxGithubLogo, RxNotionLogo } from 'react-icons/rx';
 import { BsPencil } from 'react-icons/bs';
+import { useDispatch, useSelector } from 'react-redux';
+import { login, logout } from '../../store/authSlice';
 
 export default function Header() {
+  const isLogin = useSelector(state => state.auth.isLogin);
+  const dispatch = useDispatch();
+  const handleLogin = () => (isLogin ? dispatch(logout()) : dispatch(login()));
+
   return (
     <header className={styles.header}>
+      <button className={styles.login} onClick={handleLogin}>
+        {isLogin ? '로그아웃' : '로그인'}
+      </button>
       <nav className={styles.navbar}>
         <Link to={'/'}>
           <h1 className={styles.title}>제이원 개발 블로그</h1>
@@ -27,10 +36,12 @@ export default function Header() {
               <RxNotionLogo />
             </a>
           </div>
-          <Link to={'/new'} className={styles.new}>
-            <BsPencil />
-            글쓰기
-          </Link>
+          {isLogin && (
+            <Link to={'/new'} className={styles.new}>
+              <BsPencil />
+              글쓰기
+            </Link>
+          )}
         </div>
       </nav>
     </header>
