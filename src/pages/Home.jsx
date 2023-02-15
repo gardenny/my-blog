@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 
 import { usePostContext } from '../context/PostProvider';
 import LoadingSpinner from '../components/LoadingSpinner/LoadingSpinner';
-import NotFound from '../pages/NotFound';
+import NotFound from './NotFound/NotFound';
 import PostList from '../components/PostList/PostList';
 import SearchBar from '../components/SearchBar/SearchBar';
 import Toast from '../components/Toast/Toast';

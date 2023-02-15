@@ -19,7 +19,7 @@ import { addToast, deleteToast } from '../../store/toastSlice';
 import getStringDate from '../../util/data';
 
 import LoadingSpinner from '../../components/LoadingSpinner/LoadingSpinner';
-import NotFound from '../NotFound';
+import NotFound from '../NotFound/NotFound';
 import PostInfo from '../../components/PostInfo/PostInfo';
 import Button from '../../components/Button/Button';
 import Profile from '../../components/Profile/Profile';

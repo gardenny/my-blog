@@ -1,0 +1,15 @@
+.container {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  row-gap: 2rem;
+}
+.comment {
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: 500;
+  line-height: 1.6;
+}
