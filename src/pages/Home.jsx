@@ -1,14 +1,18 @@
 import { useCallback, useEffect, useState } from 'react';
-import { usePostContext } from '../context/PostProvider';
+import { useSelector } from 'react-redux';
 
+import { usePostContext } from '../context/PostProvider';
 import LoadingSpinner from '../components/LoadingSpinner/LoadingSpinner';
 import NotFound from '../pages/NotFound';
 import PostList from '../components/PostList/PostList';
 import SearchBar from '../components/SearchBar/SearchBar';
+import Toast from '../components/Toast/Toast';
 
 export default function Home() {
   const { isLoading, error, posts } = usePostContext();
   const [postList, setPostList] = useState([]);
+  const toast = useSelector(state => state.toast.toast);
+
   const renderPostList = useCallback(
     keyword => {
       if (keyword) {
@@ -33,6 +37,7 @@ export default function Home() {
     <>
       <SearchBar onSearch={renderPostList} />
       <PostList postList={postList} />
+      {toast && <Toast toast={toast} />}
     </>
   );
 }

@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from 'react';
 import styles from './PostDetail.module.css';
+import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 
 // Toast 에디터
 import { Viewer } from '@toast-ui/react-editor';
@@ -14,6 +15,7 @@ import 'prismjs/themes/prism-dark.css';
 
 import usePost from '../../hooks/usePost';
 import { usePostContext } from '../../context/PostProvider';
+import { addToast, deleteToast } from '../../store/toastSlice';
 import getStringDate from '../../util/data';
 
 import LoadingSpinner from '../../components/LoadingSpinner/LoadingSpinner';
@@ -27,6 +29,7 @@ export default function PostDetail() {
   const { postId } = useParams();
   const { isLoading, error, posts } = usePostContext();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     if (posts) {
@@ -42,8 +45,9 @@ export default function PostDetail() {
   const handleRemove = () => {
     if (window.confirm('게시글을 삭제하시겠습니까?')) {
       onRemove.mutate(id);
-      alert('게시글이 삭제되었습니다.');
       navigate('/', { replace: true });
+      dispatch(addToast({ type: 'success', text: '게시글이 삭제되었습니다.' }));
+      setTimeout(() => dispatch(deleteToast()), 3000);
     }
   };
 

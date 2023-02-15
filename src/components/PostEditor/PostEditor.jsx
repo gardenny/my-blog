@@ -1,7 +1,8 @@
-import { useEffect, useState, useRef } from 'react';
 import styles from './PostEditor.module.css';
+import { useEffect, useState, useRef } from 'react';
 
 import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import { FaCamera } from 'react-icons/fa';
 import uuid from 'react-uuid';
 
@@ -23,6 +24,7 @@ import '@toast-ui/editor-plugin-code-syntax-highlight/dist/toastui-editor-plugin
 import 'prismjs/themes/prism-dark.css';
 
 import { getCoverImageUrl } from '../../api/firebase';
+import { addToast, deleteToast } from '../../store/toastSlice';
 import usePost from '../../hooks/usePost';
 import Button from '../Button/Button';
 
@@ -42,11 +44,10 @@ export default function PostEditor({ isEdit, targetPost }) {
 
   const { onAdd } = usePost();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const titleRef = useRef();
   const editorRef = useRef();
-
-  useEffect(() => {}, []);
 
   // 수정 모드일 경우 Toast 에디터 초기 내용 설정
   useEffect(() => {
@@ -92,8 +93,9 @@ export default function PostEditor({ isEdit, targetPost }) {
         body,
         date: new Date().getTime(),
       });
-      alert('게시글이 작성되었습니다.');
       navigate(isEdit ? `/posts/${id}` : '/', { replace: true });
+      dispatch(addToast({ type: 'success', text: '게시글이 업로드되었습니다.' }));
+      setTimeout(() => dispatch(deleteToast()), 3000);
     }
   };
 

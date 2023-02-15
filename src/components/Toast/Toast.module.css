@@ -1,0 +1,27 @@
+.toast {
+  position: fixed;
+  right: 2rem;
+  bottom: 2rem;
+  width: 250px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem 0;
+  font-weight: bold;
+  border-radius: 0.2rem;
+  cursor: pointer;
+}
+.close {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+}
+
+:global .success {
+  background: var(--text-color);
+  color: var(--category-bg);
+}
+:global .error {
+  background: var(--category-bg);
+  color: var(--text-color);
+}
