@@ -28,7 +28,7 @@ import { addToast, deleteToast } from '../../store/toastSlice';
 import usePost from '../../hooks/usePost';
 import Button from '../Button/Button';
 
-const optionList = ['html', 'css', 'javascript', 'react', 'git', 'project', 'web', 'tip', 'error', 'setting', 'etc'];
+const optionList = ['html', 'css', 'javascript', 'react', 'git', 'project', 'web', 'tip', 'error', 'review', 'setting', 'etc'];
 const toolbarItems = [
   // 툴바 옵션 설정
   ['heading', 'bold', 'italic', 'strike'],
@@ -51,7 +51,11 @@ export default function PostEditor({ isEdit, targetPost }) {
 
   // 수정 모드일 경우 Toast 에디터 초기 내용 설정
   useEffect(() => {
-    if (isEdit) editorRef.current.getInstance().setHTML(body);
+    if (isEdit) {
+      const editorInstance = editorRef.current.getInstance();
+      const currentMarkdown = editorInstance.getMarkdown();
+      if (currentMarkdown !== body) editorInstance.setMarkdown(body);
+    }
   }, [isEdit, body]);
 
   const uploadImage = e => {
@@ -65,7 +69,7 @@ export default function PostEditor({ isEdit, targetPost }) {
   };
 
   const handleEditor = () => {
-    const text = editorRef.current.getInstance().getHTML();
+    const text = editorRef.current.getInstance().getMarkdown();
     setContent({ ...content, body: text });
   };
 
@@ -93,7 +97,7 @@ export default function PostEditor({ isEdit, targetPost }) {
         body,
         date: new Date().getTime(),
       });
-      navigate(isEdit ? `/posts/${id}` : '/', { replace: true });
+      navigate('/', { replace: true });
       dispatch(addToast({ type: 'success', text: '게시글이 업로드되었습니다.' }));
       setTimeout(() => dispatch(deleteToast()), 3000);
     }

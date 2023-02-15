@@ -79,7 +79,7 @@ export default function PostDetail() {
           </div>
         )}
       </div>
-      <Viewer plugins={[[codeSyntaxHighlight, { highlighter: Prism }]]} initialValue={body || ''} theme="dark" />
+      {body && <Viewer plugins={[[codeSyntaxHighlight, { highlighter: Prism }]]} initialValue={body || ''} theme="dark" />}
       <Profile />
     </>
   );

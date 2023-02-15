@@ -106,6 +106,12 @@ h3 {
 .toastui-editor-contents h6 {
   line-height: 1.4 !important;
 }
+.toastui-editor-contents h3 {
+  margin: 32px 0 8px !important;
+}
+.toastui-editor-contents h4 {
+  margin: 20px 0 2px !important;
+}
 .toastui-editor-contents p {
   color: var(--text-color) !important;
   font-size: 1.125rem;
@@ -120,11 +126,20 @@ h3 {
   box-shadow: none !important;
   border: none !important;
 }
+.toastui-editor-contents pre {
+  border-radius: 0.3rem !important;
+}
+.toastui-editor-contents code > * {
+  font-family: 'IBM Plex Mono', 'D2Coding' !important;
+}
 .toastui-editor-code-block-language-list button:hover {
   background-color: var(--input-bg) !important;
 }
 .toastui-editor-code-block-language-list button.active {
   color: var(--category-bg) !important;
+}
+.toastui-editor-contents code {
+  text-shadow: none !important;
 }
 .toastui-editor-contents blockquote {
   border-color: #807473 !important;
