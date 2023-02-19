@@ -1,70 +1,116 @@
-# Getting Started with Create React App
+![blog](https://user-images.githubusercontent.com/110226567/219267513-bf2ba964-d65a-45ef-8996-88942cd60e8a.png)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# ✏️ My Blog
 
-## Available Scripts
+나만의 개발 블로그 사이트 👉 [Demo](https://jone-dev-blog.netlify.app)
 
-In the project directory, you can run:
+<br />
 
-### `yarn start`
+## 📢 프로젝트 개요
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+그동안 공부한 내용들을 토대로 조금 의미 있는 프로젝트를 진행해보고 싶었던 찰나,<br />
+문득 개발자라면 블로그 사이트 하나 정도는 있어야 하지 않나.. 하는 생각이 들었습니다.<br />
+조만간 velog를 시작할 예정이긴 하지만, 직접 구현해보고 싶은 욕심이 들어 제작하게 되었습니다.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+<br />
 
-### `yarn test`
+## 🗨️ 사용 기술
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+<p>
+  <img src="https://img.shields.io/badge/React-61DAFB?style=flat-square&logo=React&logoColor=black"/>
+  <img src="https://img.shields.io/badge/React Router-CA4245?style=flat-square&logo=ReactRouter&logoColor=white"/>
+  <img src="https://img.shields.io/badge/React Query-FF4154?style=flat-square&logo=ReactQuery&logoColor=white"/>
+  <img src="https://img.shields.io/badge/Redux Toolkit-764ABC?style=flat-square&logo=Redux&logoColor=white"/>
+  <img src="https://img.shields.io/badge/PostCSS-DD3A0A?style=flat-square&logo=PostCSS&logoColor=white"/>
+  <img src="https://img.shields.io/badge/Firebase-FFCA28?style=flat-square&logo=Firebase&logoColor=white"/>
+</p>
 
-### `yarn build`
+<br />
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## 📋 주요 기능
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- 새로운 포스트 작성 및 수정 / 삭제
+- 제목 단위로 검색하여 원하는 포스트 열람
+- 라이브러리를 활용하여 마크다운 언어 표현
+- 포스트 작업 결과에 따른 토스트 팝업창 노출
+- 파이어베이스와 연동하여 데이터 실시간 업데이트
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+<br />
 
-### `yarn eject`
+## 💻 소스 코드
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+전체 코드 보러 가기 👉 [Notion](https://www.notion.so/imjone/Blog-1069c963a9d646368e3415bff6739ac7?pvs=4)
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### 📍 마크다운 에디터 컴포넌트
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+Toast UI Editor 라이브러리를 활용하여 마크다운 언어를 표현하였습니다.<br />
+제목 크기, 글자 색상 및 코드 블럭 등 다양한 툴을 이용하여 포스트를 작성할 수 있습니다.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+```javascript
+// PostEditor.jsx
 
-## Learn More
+import { Editor } from '@toast-ui/react-editor';
+import '@toast-ui/editor/dist/toastui-editor.css';
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+// 툴바 옵션 설정
+const toolbarItems = [
+  ['heading', 'bold', 'italic', 'strike'],
+  ['hr', 'quote'],
+  ['ul', 'ol', 'code', 'codeblock'],
+];
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+<Editor
+  initialEditType="wysiwyg"
+  hideModeSwitch={true}
+  toolbarItems={toolbarItems}
+  autofocus={false}
+></Editor>;
+```
 
-### Code Splitting
+### 📍 마크다운 뷰어 컴포넌트
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+Toast UI Editor 라이브러리에서 제공하는 `Viewer` 컴포넌트를 렌더링합니다.<br />
+포스트 상세 페이지에서 작성된 마크다운 콘텐츠를 그대로 확인해볼 수 있습니다.
 
-### Analyzing the Bundle Size
+```javascript
+// PostDetail.jsx
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+import { Viewer } from '@toast-ui/react-editor';
+import '@toast-ui/editor/dist/toastui-editor-viewer.css';
 
-### Making a Progressive Web App
+const { id, category, date, title, image, body } = content;
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+<Viewer
+  plugins={[[codeSyntaxHighlight, { highlighter: Prism }]]}
+  initialValue={body || ''}
+/>;
+```
 
-### Advanced Configuration
+### 📍 마크다운 콘텐츠 수정
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+컴포넌트 렌더링 시 `setMarkdown` 메소드를 통해 에디터의 초기 콘텐츠를 세팅합니다.<br />
+수정 모드일 경우 기존의 내용을 그대로 불러오며, 내용을 자유롭게 수정할 수 있습니다.
 
-### Deployment
+```javascript
+// PostEditor.jsx
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+const [content, setContent] = useState(isEdit ? targetPost : initialContent);
+const { id, image, category, title, description, body } = content;
 
-### `yarn build` fails to minify
+useEffect(() => {
+  if (isEdit) {
+    const editorInstance = editorRef.current.getInstance();
+    const currentMarkdown = editorInstance.getMarkdown();
+    if (currentMarkdown !== body) editorInstance.setMarkdown(body);
+  }
+}, [isEdit, body]);
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+<br />
+
+## 😊 배운 점 및 느낀 점
+
+- 리덕스 툴킷을 처음으로 사용해볼 수 있어 좋은 경험이었습니다.
+- 글로벌 상태 관리에 대한 지식과 숙련도가 더 필요하다고 느꼈습니다.
+- 에러를 잡아나가는 과정에서 능동적 문제 해결 능력을 기를 수 있었습니다.
+- 프로젝트의 기획부터 기능까지 직접 고민하고 구현해나가며 큰 성취감을 얻었습니다.
