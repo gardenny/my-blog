@@ -28,7 +28,7 @@ import { addToast, deleteToast } from '../../store/toastSlice';
 import usePost from '../../hooks/usePost';
 import Button from '../Button/Button';
 
-const optionList = ['html', 'css', 'javascript', 'react', 'git', 'project', 'web', 'tip', 'error', 'review', 'setting', 'etc'];
+const optionList = ['html', 'css', 'javascript', 'typescript', 'react', 'git', 'project', 'web', 'tip', 'error', 'review', 'setting', 'etc'];
 const toolbarItems = [
   // 툴바 옵션 설정
   ['heading', 'bold', 'italic', 'strike'],
