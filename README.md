@@ -39,7 +39,7 @@
 
 ## 💻 소스 코드
 
-전체 코드 보러 가기 👉 [Notion](https://imjone.notion.site/Blog-1069c963a9d646368e3415bff6739ac7)
+전체 코드 보러 가기 👉 [Notion](https://imjone.notion.site/Blog-1069c963a9d646368e3415bff6739ac7?pvs=4)
 
 ### 📍 마크다운 에디터 컴포넌트
 
